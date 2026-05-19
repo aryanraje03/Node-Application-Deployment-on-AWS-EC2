@@ -1,252 +1,67 @@
-# Node.js App Deployment on AWS EC2
-
-Deploy a Node.js application on AWS EC2 (Amazon Linux 2023) with PM2 for process management.
-
----
-
-## Project Overview
-
-In this project, we:
-
-Launch an AWS EC2 instance
-Configure security groups
-Connect to EC2 using SSH
-Install Node.js and Git
-Clone the Node.js application from GitHub
-Install dependencies using NPM
-Run the application
-Manage the application using PM2
+# Node.js Application Deployment on AWS EC2  
+Using **Node.js, NPM & PM2**
 
 ---
 
-## Step 1 — Launch an EC2 Instance
+## 📖 Project Overview
 
-1. Open the **AWS Management Console** → [console.aws.amazon.com](https://console.aws.amazon.com)
-2. Navigate to **EC2 Dashboard**
-3. Click **Launch Instance**
-4. Configure the instance:
-   Click **Launch Instance** and configure:
- 
-| Setting | Value |
-|---|---|
-| **Name** | `nodejs-app-server` |
-| **AMI** | Amazon Linux 2023 |
-| **Instance Type** | t3.micro |
-| **Key Pair** | Create new or use existing `.pem` key |
+This project demonstrates the deployment of a **Node.js Web Application** on an **Amazon EC2 instance** using **Amazon Linux 2023**.  
 
-5. ## Security Group Configuration
- 
-Set the following **Inbound Rules** on your Security Group:
- 
-| Type | Protocol | Port | Source |
-|---|---|---|---|
-| SSH | TCP | **22** | My IP |
-| HTTP | TCP | **80** | 0.0.0.0/0 |
-| Custom TCP | TCP | **3000** | 0.0.0.0/0 |
- 
-> ⚠️ For SSH, always restrict to **My IP** in production to prevent unauthorized access.
+The application was cloned from GitHub, dependencies installed via **NPM**, and managed using **PM2 Process Manager** for continuous background execution.
 
-6. Click **Launch Instance** and wait for it to reach **Running** state.
+This project was completed as part of my **Cloud & DevOps Learning Journey** to gain practical, hands-on experience in:
+
+- AWS EC2 deployment  
+- Linux server administration  
+- Node.js application hosting  
+- Git and GitHub integration  
+- Process management using PM2  
+- Running production-style Node.js applications on cloud servers  
 
 ---
 
-## Step 2 — Connect to EC2 via SSH
+## ⚙️ Technologies Used
 
-```bash
-ssh -i "your-key.pem" ec2-user@<your-ec2-public-ip>
-```
-
-> **Tip:** Find your public IP in the EC2 Dashboard under **Instance Summary → Public IPv4 address**.
-
----
-
-## Step 3 — Update the System
-
-```bash
-sudo yum update -y
-```
+| Technology              | Purpose                     |
+|-------------------------|-----------------------------|
+| AWS EC2 (Amazon Linux)  | Cloud Virtual Server        |
+| Node.js                 | JavaScript Runtime          |
+| NPM                     | Package Manager             |
+| Git & GitHub            | Source Code Management      |
+| PM2                     | Process Manager             |
+| Linux                   | Server Operating System     |
 
 ---
 
-## Step 4 — Install Node.js and Git
+## 🏗️ Project Architecture
 
-```bash
-sudo yum install git nodejs -y
-```
+User Browser
+↓
+AWS EC2 Instance
+↓
+Node.js Application
+↓
+PM2 Process Manager
 
-Verify installations:
-
-```bash
-node -v
-npm -v
-git --version
-```
 
 ---
 
-## Step 5 — Clone the Repository
+## 🚀 Implementation Steps
 
+### Step 1 — Launch EC2 Instance
+- Created an **Amazon Linux 2023** EC2 instance.  
+- Configured Security Group:
+
+| Type | Port |
+|------|------|
+| SSH  | 22   |
+| HTTP | 80   |
+| TCP  | 3000 |
+
+Connect via SSH:
 ```bash
-git clone https://github.com/iamtruptimane/node-js-app-CICD.git
-```
+ssh -i "your-key.pem" ec2-user@your-ec2-public-ip
 
-Rename the folder for convenience:
-
-```bash
-sudo mv node-js-app-CICD/ node
-```
-
-Navigate into the project directory:
-
-```bash
-cd node/
-ls
-```
-
----
-
-## Step 6 — Clean Up Unnecessary Files
-
-```bash
-sudo rm -rf jenkinsfile README.md
-```
-
----
-
-## Step 7 — Inspect the Application
-
-Review the application entry point and dependencies:
-
-```bash
-cat app.js
-cat package.json
-```
-
----
-
-## Step 8 — Install Dependencies
-
-```bash
-sudo npm install
-```
-
----
-
-## Step 9 — Run the App (Test)
-
-Test that the app starts correctly:
-
-```bash
-sudo node app.js
-```
-
-> Open your browser at `http://<your-ec2-public-ip>:3000` to verify it's running.
-
----
-
-## Step 10 — Run with PM2 (Production)
-
-Install PM2 globally for persistent process management:
-
-```bash
-sudo npm install -g pm2
-```
-
-Start the app with PM2:
-
-```bash
-sudo pm2 start app.js
-```
-
-Check running processes:
-
-```bash
-pm2 list
-```
-
-Restart if needed:
-
-```bash
-sudo pm2 restart app.js
-```
-
----
-
-## Step 11 — Edit the App (Optional)
-
-To make changes to the app file:
-
-```bash
-sudo vim app.js
-```
-
-After editing, restart the app:
-
-```bash
-sudo pm2 restart app.js
-```
-##  Access the Application
- 
-Once running, open your browser:
- 
-```
-http://<your-ec2-public-ip>:3000
-```
- 
-Find your **Public IPv4 address** in:
-AWS Console → EC2 → Instances → your instance → **Public IPv4 address**
- 
----
----
-
-## Project Structure
-
-```
-node/
-├── app.js          # Main application entry point
-├── package.json    # Project metadata and dependencies
-└── node_modules/   # Installed packages (generated by npm install)
-```
-
-## Key Commands Summary
-
-```bash
-# System update
+Step 2 — Update Linux Packages
 sudo yum update -y
 
-# Install tools
-sudo yum install git nodejs -y
-
-# Clone project
-git clone <repo-url>
-
-# Install dependencies
-sudo npm install
-
-# Run directly
-sudo node app.js
-
-# Run with PM2
-sudo npm install -g pm2
-sudo pm2 start app.js
-pm2 list
-sudo pm2 restart app.js
-```
-## Quick Reference
- 
-| Command | Purpose |
-|---|---|
-| `sudo yum update -y` | Update all system packages |
-| `sudo yum install git nodejs -y` | Install Git and Node.js |
-| `node -v` | Check Node.js version |
-| `npm -v` | Check npm version |
-| `git --version` | Check Git version |
-| `sudo npm install` | Install project dependencies |
-| `sudo node app.js` | Run app directly (temporary) |
-| `sudo npm install -g pm2` | Install PM2 process manager |
-| `sudo pm2 start app.js` | Start app with PM2 |
-| `sudo pm2 status app.js` | Check app status |
-| `sudo pm2 restart app.js` | Restart app |
-| `sudo pm2 stop app.js` | Stop app |
-| `sudo pm2 logs` | View live application logs |
-| `history` | View all previously run commands |
