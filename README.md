@@ -45,7 +45,7 @@ Node.js Application
   ↓
 PM2 Process Manager
 ```
-
+> <img src="/Screenshots/Architecture Diagram.png" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 ---
 
 ## Deployment Steps
