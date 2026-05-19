@@ -35,15 +35,14 @@ This project was completed as part of a Cloud and DevOps learning journey to bui
 ## Project Architecture
 
 ```
-User Browser
-     |
-     v
-AWS EC2 Instance
-     |
-     v
+User
+  ↓
+Internet
+  ↓
+AWS EC2 (Amazon Linux 2023)
+  ↓
 Node.js Application
-     |
-     v
+  ↓
 PM2 Process Manager
 ```
 
