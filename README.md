@@ -53,6 +53,9 @@ PM2 Process Manager
 ### Step 1 — Launch an EC2 Instance
 
 - Create an Amazon Linux 2023 EC2 instance from the AWS Console.
+
+> <img src="/Screenshots/Ec-2 Instances.jpeg" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
+
 - Configure the Security Group with the following inbound rules:
 
 | Type | Port |
@@ -84,7 +87,7 @@ sudo yum install nodejs -y
 node --version
 npm -v
 ```
-
+> <img src="/Screenshots/Node Install.jpeg" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 ---
 
 ### Step 4 — Install Git
@@ -102,7 +105,7 @@ git --version
 git clone https://github.com/iamtruptimane/node-js-app-CICD.git
 ls
 ```
-
+> <img src="/Screenshots/Git clone.jpeg" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 ---
 
 ### Step 6 — Rename the Project Directory
@@ -156,7 +159,7 @@ sudo node app.js
 ```bash
 sudo npm install -g pm2
 ```
-
+> <img src="/Screenshots/Pm2 status app.js.jpeg" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 ---
 
 ### Step 12 — Start the Application with PM2
@@ -173,7 +176,7 @@ pm2 list
 ```bash
 sudo pm2 restart app.js
 ```
-
+> <img src="/Screenshots/pm2 restart app.js.jpeg" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 ---
 
 ### Step 14 — Edit the Application File
@@ -201,6 +204,7 @@ Once the application is running, open a browser and navigate to:
 ```
 http://your-ec2-public-ip:3000
 ```
+> <img src="/Screenshots/Output.jpeg" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 
 Replace `your-ec2-public-ip` with the actual public IP address of your EC2 instance.
 
